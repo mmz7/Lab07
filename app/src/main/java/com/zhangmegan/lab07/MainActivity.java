@@ -43,16 +43,15 @@ public class MainActivity extends AppCompatActivity {
         FragmentB frag2 = (FragmentB)getSupportFragmentManager().findFragmentByTag("a");
         FragmentB frag3 = (FragmentB)getSupportFragmentManager().findFragmentByTag("b");
         //((TextView)(fragB.view.findViewById(R.id.b_textview))).setText(R.string.greeting2);
-        FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.slide_in, R.anim.slide_in);
+        FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();
         if(frag2.isHidden())
-            ft2.show(frag2);
+            ft2.setCustomAnimations(R.anim.slide_in, R.anim.slide_in).show(frag2);
         else if(frag2.isAdded())
             ft2.hide(frag2);
-        if(frag2.isVisible() && frag3.isAdded()) {
-            ft2.remove(frag3);
-            count++;
-        }
+//        if(frag2.isVisible() && frag3.isAdded()) {
+//            ft2.remove(frag3);
+//            count++;
+//        }
 //        if(count == 1) {
 //            ft2.replace(R.id.frame, FragmentB.newInstance(931, "Goblin"));
 //            count--;
