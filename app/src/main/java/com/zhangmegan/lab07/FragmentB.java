@@ -1,34 +1,29 @@
 package com.zhangmegan.lab07;
 
 import android.os.Bundle;
+import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.transition.Transition;
-import androidx.transition.TransitionInflater;
 
 public class FragmentB extends Fragment {
     View view;
-    public static FragmentB newInstance(int x, String s) {
+    public static FragmentB newInstance(int x, String s, int image) {
         FragmentB fragmentB = new FragmentB();
         Bundle args = new Bundle();
         args.putInt("MyAge", x);
         args.putString("MyName", s);
+        args.putInt("MyFlower", image);
         fragmentB.setArguments(args);
         return fragmentB;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        TransitionInflater inflater = android.transition.TransitionInflater.from(requireContext());
-        setExitTransition(inflater.inflateTransition(R.transition.slide_in));
     }
 
     @Nullable
@@ -49,5 +44,9 @@ public class FragmentB extends Fragment {
         Button button = view.findViewById(R.id.b_button);
         String b = getString(R.string.click_greet, age);
         button.setText(b);
+        int image = getArguments().getInt("MyFlower", 0);
+        ImageView iv = view.findViewById(R.id.imgView);
+        iv.setBackgroundResource(image);
+        tv.bringToFront();
     }
 }
